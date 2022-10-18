@@ -1,0 +1,71 @@
+1. Updating WSL
+----------------------
+Commands:
+-------------------
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo apt-get dist-upgrade
+
+apt-get update: Downloads package lists from online repositories and “updates” them to get information on the newest versions of packages and their dependencies.
+
+apt-get upgrade: Fetches and installs newest package versions which currently exist on the system. APT must know about these new versions by way of ‘apt-get update’
+
+apt-get dist-upgrade: In addition to performing the function of upgrade, this option also intelligently handles changing dependencies with new versions of packages.
+
+
+
+2.Install cross compilers on host machine:
+----------------------------------------------------------
+Run the below given command on any ubuntu command prompt to install cross compiler For ARM 64bit toolchain.
+
+Commands:
+----------------
+$ sudo apt-get install gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
+
+
+
+3.Install package dependencies
+-------------------------------------------
+Command:
+--------------
+$ sudo apt-get install build-essential autoconf libtool cmake make
+
+
+4.Now we can cross compile the programes to get ececutible for ARM64 based machines using below command Cross compile command.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+$ aarch64-linux-gnu-gcc filename.c -o helloworld.arm
+
+
+5.Test the output file using below command:
+-------------------------------------------------------------
+$ file helloworld.arm
+
+
+// The above generated executible file using cross compilation can be run only in  ARM64 based machine because instructions are encoded differently on different architectures.
+
+// We can bypass this restriction with the QEMU user emulator which allows us to run binaries for other architectures on our host system. 
+    The procedure for the same is given below: 
+
+
+
+6.Command to install QEMU :
+-----------------------------------------
+$ sudo apt install qemu-user qemu-user-static gcc-aarch64-linux-gnu binutils-aarch64-linux-gnu binutils-aarch64-linux-gnu-dbg build-essential
+
+
+
+
+7.Now we can execute bianry file of ARM64 on our machine using Qemu user.
+-----------------------------------------------------------------------------------------------------------
+Command:
+--------------
+$ qemu-aarch64 -L /usr/aarch64-linux-gnu ./filename(name of Arm64 executilble file)
+
+
+
+
+
+
+
+
